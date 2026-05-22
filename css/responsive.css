@@ -1,0 +1,127 @@
+/* ============================================================================
+   BitRetro — Responsive Layouts
+   T04: Responsive Layouts for All Devices
+   ----------------------------------------------------------------------------
+   Breakpoint strategy (loaded last so it overrides layout defaults):
+
+     Large desktop  >= 1920px   roomier container, larger type
+     Desktop         1025–1919  base layout (4-col grids, inline nav)
+     Tablet           768–1024  2-col grids
+     Mobile           321–767   single column, hamburger nav
+     Small mobile    <= 480     tightened spacing, full-width controls
+
+   Plus a flexible auto-fit grid utility and touch-friendly affordances.
+   ========================================================================== */
+
+/* --- Flexible, content-aware grid utility ---------------------------- */
+/* Cards reflow automatically between the explicit breakpoints below. */
+.stats {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.about__grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+/* ====================================================================== */
+/* Large desktop — 1920px and up                                          */
+/* ====================================================================== */
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 1480px;
+    --header-h: 5rem;
+  }
+  .hero { padding-block: var(--space-10) var(--space-8); }
+}
+
+/* ====================================================================== */
+/* Tablet — 768px to 1024px                                               */
+/* ====================================================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .about__grid { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding-block: var(--space-8) var(--space-6); }
+}
+
+/* ====================================================================== */
+/* Mobile — 767px and down (covers 320–480 and up to 767)                 */
+/* ====================================================================== */
+@media (max-width: 767px) {
+  /* Collapse inline nav into a hamburger dropdown. */
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+
+  .nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-2) var(--container-pad) var(--space-4);
+    background: color-mix(in srgb, var(--color-bg-900) 96%, transparent);
+    border-bottom: var(--border-hair);
+    backdrop-filter: blur(12px);
+    transform: translateY(-12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur-med) var(--ease-out),
+                transform var(--dur-med) var(--ease-out),
+                visibility var(--dur-med);
+  }
+  .nav.nav--open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav__link {
+    display: flex;
+    align-items: center;
+    min-height: 48px; /* touch-friendly tap target */
+    padding-inline: var(--space-2);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+    font-size: var(--fs-sm);
+  }
+
+  /* Single-column data grids. */
+  .stats,
+  .about__grid { grid-template-columns: 1fr; }
+
+  /* Tighten vertical rhythm on small screens. */
+  .section { padding-block: var(--space-6); }
+  .hero { padding-block: var(--space-7) var(--space-5); }
+  .price-board { margin-block: var(--space-5); }
+
+  /* Stack footer. */
+  .site-footer__inner { flex-direction: column; text-align: center; }
+  .site-footer__links { justify-content: center; flex-wrap: wrap; }
+}
+
+/* ====================================================================== */
+/* Small mobile — 480px and down                                          */
+/* ====================================================================== */
+@media (max-width: 480px) {
+  :root { --container-pad: 1rem; }
+
+  .price-board__deltas { flex-direction: column; align-items: stretch; }
+  .price-board__deltas .pill { justify-content: center; }
+
+  /* Full-width, comfortably tappable buttons. */
+  .btn { width: 100%; justify-content: center; }
+
+  .panel { padding: var(--space-4); }
+  .card { padding: var(--space-4); }
+}
+
+/* ====================================================================== */
+/* Touch devices — drop hover-only motion, enlarge targets               */
+/* ====================================================================== */
+@media (hover: none) {
+  .card:hover { transform: none; }
+  .btn:hover { transform: none; }
+  .nav__link, .btn, .pill { -webkit-tap-highlight-color: transparent; }
+}
+
+/* Landscape phones: keep the hero from eating the viewport. */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero { padding-block: var(--space-5); }
+}
