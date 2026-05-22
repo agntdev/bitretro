@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitRetro — Design System Styleguide</title>
+  <meta name="description" content="Interactive styleguide for the BitRetro retro-futuristic design system: palette, typography, glow, motion and components." />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <style>
+    /* Styleguide-only layout (the production site lives in index.html, built in T02) */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--color-ink);
+      background: var(--grad-space) fixed;
+      line-height: var(--lh-base);
+      padding: var(--space-7) var(--container-pad) var(--space-10);
+    }
+    .wrap { max-width: var(--container-max); margin: 0 auto; }
+    h1.sg-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      margin: 0 0 var(--space-2);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-gold);
+      text-shadow: var(--glow-gold);
+    }
+    .sg-section { margin: var(--space-9) 0; }
+    .sg-section > h2 {
+      font-family: var(--font-heading);
+      font-size: var(--fs-lg);
+      text-transform: uppercase;
+      letter-spacing: var(--ls-wide);
+      margin: 0 0 var(--space-5);
+      color: var(--color-neon-cyan);
+    }
+    .grid { display: grid; gap: var(--space-4); }
+    .grid--swatches { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .grid--cards    { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .swatch {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-line);
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xs);
+    }
+    .swatch__chip { height: 80px; }
+    .swatch__meta { padding: var(--space-2) var(--space-3); background: var(--color-bg-800); }
+    .swatch__meta b { color: var(--color-ink); display: block; }
+    .swatch__meta span { color: var(--color-ink-faint); }
+    .type-row { padding: var(--space-3) 0; border-bottom: var(--border-hair); }
+    .type-row small { font-family: var(--font-mono); color: var(--color-ink-faint); }
+    .glow-row { display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: center; font-family: var(--font-display); font-size: var(--fs-xl); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="sg-section" style="margin-top:0">
+      <p class="eyebrow">BitRetro Design System</p>
+      <h1 class="sg-title glitch" data-text="STYLEGUIDE">STYLEGUIDE</h1>
+      <p style="max-width:60ch;color:var(--color-ink-muted)">
+        Retro-futurism × glam-disco. The living source of truth for color,
+        type, glow, motion and components — all driven by the tokens in
+        <code>css/tokens.css</code>.
+      </p>
+    </header>
+
+    <!-- Palette -->
+    <section class="sg-section">
+      <h2>Color Palette</h2>
+      <div class="grid grid--swatches" id="swatches"></div>
+    </section>
+
+    <!-- Gradients -->
+    <section class="sg-section">
+      <h2>Gradients</h2>
+      <div class="grid grid--swatches">
+        <div class="swatch"><div class="swatch__chip" style="background:var(--grad-sunset)"></div><div class="swatch__meta"><b>Sunset</b><span>--grad-sunset</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:var(--grad-vapor)"></div><div class="swatch__meta"><b>Vapor</b><span>--grad-vapor</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:var(--grad-disco)"></div><div class="swatch__meta"><b>Disco</b><span>--grad-disco</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:var(--grad-space)"></div><div class="swatch__meta"><b>Space</b><span>--grad-space</span></div></div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="sg-section">
+      <h2>Typography</h2>
+      <div class="type-row" style="font-family:var(--font-display);font-size:var(--fs-2xl)">Audiowide — Display 0123456789 <small>--font-display</small></div>
+      <div class="type-row" style="font-family:var(--font-heading);font-size:var(--fs-xl)">Orbitron — Heading <small>--font-heading</small></div>
+      <div class="type-row" style="font-family:var(--font-body);font-size:var(--fs-md)">Chakra Petch — Body text for paragraphs and UI. <small>--font-body</small></div>
+      <div class="type-row" style="font-family:var(--font-mono);font-size:var(--fs-md)">Share Tech Mono — $108,420.55 <small>--font-mono</small></div>
+      <div class="type-row" style="font-family:var(--font-crt);font-size:var(--fs-lg)">VT323 — CRT terminal read-out <small>--font-crt</small></div>
+      <div class="type-row" style="font-family:var(--font-pixel);font-size:var(--fs-sm)">Press Start 2P <small>--font-pixel</small></div>
+    </section>
+
+    <!-- Glow -->
+    <section class="sg-section">
+      <h2>Neon Glow</h2>
+      <div class="glow-row">
+        <span style="color:var(--color-neon-cyan);text-shadow:var(--glow-cyan)">CYAN</span>
+        <span style="color:var(--color-neon-magenta);text-shadow:var(--glow-magenta)">MAGENTA</span>
+        <span style="color:var(--color-neon-purple);text-shadow:var(--glow-purple)">PURPLE</span>
+        <span style="color:var(--color-gold);text-shadow:var(--glow-gold)">GOLD</span>
+        <span style="color:var(--color-neon-green);text-shadow:var(--glow-green)">GREEN</span>
+      </div>
+    </section>
+
+    <!-- Motion -->
+    <section class="sg-section">
+      <h2>Motion &amp; Glitch</h2>
+      <div class="glow-row">
+        <span class="anim-pulse" style="color:var(--color-neon-cyan);text-shadow:var(--glow-cyan)">PULSE</span>
+        <span class="anim-flicker" style="color:var(--color-neon-magenta);text-shadow:var(--glow-magenta)">FLICKER</span>
+        <span class="text-gradient">GRADIENT</span>
+        <span class="glitch" data-text="GLITCH" style="color:var(--color-ink)">GLITCH</span>
+        <span class="anim-blink pill__dot" style="color:var(--color-neon-green)"></span>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="sg-section">
+      <h2>Components</h2>
+      <div class="row" style="margin-bottom:var(--space-6)">
+        <button class="btn btn--primary">Primary</button>
+        <button class="btn btn--gold">Bitcoin</button>
+        <button class="btn">Default</button>
+        <button class="btn btn--ghost">Ghost</button>
+        <span class="pill pill--up"><span class="pill__dot"></span>+4.21%</span>
+        <span class="pill pill--down"><span class="pill__dot"></span>-1.08%</span>
+        <span class="pill pill--gold">BTC</span>
+      </div>
+      <div class="grid grid--cards">
+        <div class="card card--gold">
+          <span class="card__label">BTC / USD</span>
+          <span class="card__value">$108,420</span>
+          <span class="card__sub">updated just now</span>
+        </div>
+        <div class="card card--green">
+          <span class="card__label">24h Change</span>
+          <span class="card__value" style="color:var(--color-up)">+4.21%</span>
+          <span class="card__sub">+$4,380</span>
+        </div>
+        <div class="card card--magenta">
+          <span class="card__label">Market Cap</span>
+          <span class="card__value">$2.14T</span>
+          <span class="card__sub">rank #1</span>
+        </div>
+        <div class="card">
+          <span class="card__label">Tx / sec</span>
+          <span class="card__value">6.7</span>
+          <span class="card__sub">mempool live</span>
+        </div>
+      </div>
+      <hr class="hr-neon" style="margin:var(--space-7) 0" />
+      <div class="panel">
+        <p class="eyebrow">Panel</p>
+        <p style="margin:var(--space-2) 0 0;color:var(--color-ink-muted)">
+          A frosted deep-space surface for grouping content. Built from
+          <code>--color-bg-700</code>, <code>--shadow-panel</code> and a hairline border.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Render palette swatches straight from the token names so the styleguide
+    // can never drift from tokens.css.
+    const TOKENS = [
+      "neon-magenta","neon-pink","neon-cyan","neon-purple","neon-green","neon-orange",
+      "bitcoin","gold","bg-900","bg-700","bg-500","ink","ink-muted","line"
+    ];
+    const root = getComputedStyle(document.documentElement);
+    const host = document.getElementById("swatches");
+    host.innerHTML = TOKENS.map((name) => {
+      const varName = `--color-${name}`;
+      const val = root.getPropertyValue(varName).trim();
+      return `<div class="swatch">
+        <div class="swatch__chip" style="background:${val}"></div>
+        <div class="swatch__meta"><b>${name}</b><span>${val || varName}</span></div>
+      </div>`;
+    }).join("");
+  </script>
+</body>
+</html>

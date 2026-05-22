@@ -1,0 +1,135 @@
+/* ============================================================================
+   BitRetro — Animations & Glitch Primitives
+   T01: Design System with Retro-Futuristic Aesthetics
+   ----------------------------------------------------------------------------
+   Reusable keyframes + utility classes that any component can opt into.
+   Effect *applications* (scanline overlay, disco ball, etc.) live in T05;
+   this file ships the shared motion vocabulary they build on.
+   ========================================================================== */
+
+/* --- Keyframes --------------------------------------------------------- */
+
+/* Steady neon breathing — pulses a text/box glow up and down. */
+@keyframes neon-pulse {
+  0%, 100% { filter: brightness(1);    opacity: 1; }
+  50%      { filter: brightness(1.35); opacity: 0.92; }
+}
+
+/* Flicker like a tired neon tube. */
+@keyframes neon-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.35; }
+}
+
+/* RGB split glitch — chromatic aberration shudder. */
+@keyframes glitch-shift {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-2px, 1px); }
+  40%  { transform: translate(2px, -1px); }
+  60%  { transform: translate(-1px, -1px); }
+  80%  { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
+}
+
+/* Clip-path jitter used by the ::before/::after glitch layers. */
+@keyframes glitch-clip {
+  0%   { clip-path: inset(0 0 85% 0); }
+  20%  { clip-path: inset(40% 0 40% 0); }
+  40%  { clip-path: inset(75% 0 5% 0); }
+  60%  { clip-path: inset(15% 0 60% 0); }
+  80%  { clip-path: inset(55% 0 25% 0); }
+  100% { clip-path: inset(0 0 90% 0); }
+}
+
+/* Scanlines drifting down a CRT. */
+@keyframes scanline-drift {
+  from { background-position-y: 0; }
+  to   { background-position-y: 100vh; }
+}
+
+/* Slow rotation for the disco ball / radial accents. */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Animated gradient wash for chrome/vapor text. */
+@keyframes gradient-pan {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Gentle float for hero elements. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* Fade + rise entrance. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Blink for CRT cursors / live dots. */
+@keyframes blink {
+  0%, 49%  { opacity: 1; }
+  50%, 100% { opacity: 0.15; }
+}
+
+/* --- Utility classes --------------------------------------------------- */
+
+.anim-pulse   { animation: neon-pulse 2.6s ease-in-out infinite; }
+.anim-flicker { animation: neon-flicker 4s steps(1) infinite; }
+.anim-float   { animation: float 6s ease-in-out infinite; }
+.anim-spin    { animation: spin 12s linear infinite; }
+.anim-blink   { animation: blink 1.1s steps(1) infinite; }
+.anim-rise    { animation: rise-in var(--dur-slow) var(--ease-out) both; }
+
+/* Drop-in glitch text. Wrap text and mirror it into a `data-text` attribute:
+   <span class="glitch" data-text="BITRETRO">BITRETRO</span> */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--color-neon-magenta);
+  animation: glitch-clip 2.6s steps(2) infinite, glitch-shift 2.6s ease-in-out infinite;
+}
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--color-neon-cyan);
+  animation: glitch-clip 3.1s steps(2) infinite reverse, glitch-shift 3.1s ease-in-out infinite reverse;
+}
+
+/* One-shot glitch burst — add the class, e.g. on a data refresh, then remove. */
+.glitch-burst {
+  animation: glitch-shift 320ms steps(2) 1;
+}
+
+/* Animated gradient text helper. */
+.text-gradient {
+  background: var(--grad-vapor);
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 8s ease infinite;
+}
+
+/* Respect reduced-motion: freeze everything in a calm resting state. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-pulse, .anim-flicker, .anim-float, .anim-spin, .anim-blink,
+  .anim-rise, .glitch::before, .glitch::after, .glitch-burst, .text-gradient {
+    animation: none !important;
+  }
+  .glitch::before, .glitch::after { opacity: 0; }
+}

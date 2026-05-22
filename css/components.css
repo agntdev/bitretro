@@ -1,0 +1,157 @@
+/* ============================================================================
+   BitRetro — UI Component Templates
+   T01: Design System with Retro-Futuristic Aesthetics
+   ----------------------------------------------------------------------------
+   Reusable, token-driven component classes (buttons, cards, pills, panels,
+   badges). BEM-friendly naming so the page layout built in T02 can compose
+   them directly. Showcased live in styleguide.html.
+   ========================================================================== */
+
+/* --- Buttons ---------------------------------------------------------- */
+.btn {
+  --btn-accent: var(--color-neon-cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-heading);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--btn-accent) 12%, transparent);
+  border: 1px solid var(--btn-accent);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-med) var(--ease-out),
+              background var(--dur-med) var(--ease-out);
+}
+.btn:hover {
+  background: color-mix(in srgb, var(--btn-accent) 24%, transparent);
+  box-shadow: 0 0 4px var(--btn-accent), 0 0 18px color-mix(in srgb, var(--btn-accent) 60%, transparent);
+  transform: translateY(-2px);
+}
+.btn:active { transform: translateY(0); }
+.btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+.btn--primary { --btn-accent: var(--color-neon-magenta); }
+.btn--gold    { --btn-accent: var(--color-bitcoin); }
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-line);
+  color: var(--color-ink-muted);
+}
+.btn--ghost:hover {
+  color: var(--color-ink);
+  border-color: var(--color-neon-cyan);
+}
+
+/* --- Pills / badges --------------------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-neon-cyan);
+  background: color-mix(in srgb, var(--color-neon-cyan) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-neon-cyan) 45%, transparent);
+  border-radius: var(--radius-pill);
+}
+.pill--up   { color: var(--color-up);   background: color-mix(in srgb, var(--color-up) 10%, transparent);   border-color: color-mix(in srgb, var(--color-up) 45%, transparent); }
+.pill--down { color: var(--color-down); background: color-mix(in srgb, var(--color-down) 10%, transparent); border-color: color-mix(in srgb, var(--color-down) 45%, transparent); }
+.pill--gold { color: var(--color-bitcoin); background: color-mix(in srgb, var(--color-bitcoin) 12%, transparent); border-color: color-mix(in srgb, var(--color-bitcoin) 45%, transparent); }
+
+/* Live indicator dot */
+.pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* --- Panel / surface -------------------------------------------------- */
+.panel {
+  position: relative;
+  padding: var(--space-6);
+  background: color-mix(in srgb, var(--color-bg-700) 75%, transparent);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(6px);
+}
+
+/* --- Stat / data card ------------------------------------------------- */
+.card {
+  --card-accent: var(--color-neon-cyan);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background:
+    linear-gradient(160deg,
+      color-mix(in srgb, var(--card-accent) 8%, transparent) 0%,
+      transparent 60%),
+    color-mix(in srgb, var(--color-bg-600) 80%, transparent);
+  border: 1px solid var(--color-line);
+  border-top: 2px solid var(--card-accent);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--dur-med) var(--ease-out),
+              box-shadow var(--dur-med) var(--ease-out);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(8, 1, 20, 0.7),
+              0 0 22px color-mix(in srgb, var(--card-accent) 35%, transparent);
+}
+.card--gold    { --card-accent: var(--color-bitcoin); }
+.card--magenta { --card-accent: var(--color-neon-magenta); }
+.card--green   { --card-accent: var(--color-neon-green); }
+
+.card__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+.card__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  line-height: var(--lh-tight);
+  color: var(--color-ink);
+}
+.card__sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-ink-faint);
+}
+
+/* --- Section heading -------------------------------------------------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-mega);
+  text-transform: uppercase;
+  color: var(--color-neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+/* --- Divider ---------------------------------------------------------- */
+.hr-neon {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--color-neon-purple), transparent);
+  box-shadow: var(--glow-soft);
+}
