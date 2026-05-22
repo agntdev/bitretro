@@ -1,0 +1,152 @@
+/* ============================================================================
+   BitRetro — Design Tokens
+   T01: Design System with Retro-Futuristic Aesthetics
+   ----------------------------------------------------------------------------
+   A single source of truth for color, typography, spacing, radii, shadows and
+   neon glow effects. Everything downstream (layout, components, effects) reads
+   from these CSS custom properties so the whole site stays visually coherent.
+
+   Aesthetic: 1970s/1980s retro-futurism + glam-disco — deep-space backdrops,
+   neon signage, chrome highlights and Bitcoin gold.
+   ========================================================================== */
+
+:root {
+  /* --- Core palette: Neon ------------------------------------------------ */
+  --color-neon-magenta: #ff2d95;
+  --color-neon-pink:    #ff4fd8;
+  --color-neon-cyan:    #05d9e8;
+  --color-neon-blue:    #2de2e6;
+  --color-neon-purple:  #b026ff;
+  --color-neon-violet:  #7a04eb;
+  --color-neon-green:   #39ff14;
+  --color-neon-orange:  #ff6b35;
+
+  /* --- Brand: Bitcoin & disco gold -------------------------------------- */
+  --color-bitcoin:      #f7931a;  /* canonical Bitcoin orange */
+  --color-bitcoin-lite: #ffb84d;
+  --color-gold:         #ffd700;
+  --color-gold-deep:    #c89b00;
+
+  /* --- Deep-space backdrops --------------------------------------------- */
+  --color-bg-900: #07010f;  /* near-black, page base */
+  --color-bg-800: #0d0220;  /* primary surface */
+  --color-bg-700: #14072e;  /* raised surface */
+  --color-bg-600: #1d0a40;  /* cards / panels */
+  --color-bg-500: #2a1158;  /* hover / active */
+
+  /* --- Ink ------------------------------------------------------------- */
+  --color-ink:         #fdf5ff;  /* primary text */
+  --color-ink-muted:   #b9a8d6;  /* secondary text */
+  --color-ink-faint:   #6e5b91;  /* tertiary / disabled */
+  --color-line:        #3a2363;  /* hairline borders */
+
+  /* --- Semantic --------------------------------------------------------- */
+  --color-up:    var(--color-neon-green);   /* price up   */
+  --color-down:  var(--color-neon-magenta); /* price down */
+  --color-accent:   var(--color-neon-cyan);
+  --color-accent-2: var(--color-neon-magenta);
+
+  /* --- Gradients -------------------------------------------------------- */
+  --grad-sunset:  linear-gradient(120deg, #ff2d95 0%, #ff6b35 50%, #ffd700 100%);
+  --grad-vapor:   linear-gradient(120deg, #b026ff 0%, #ff2d95 50%, #05d9e8 100%);
+  --grad-chrome:  linear-gradient(180deg, #fdf5ff 0%, #b9a8d6 45%, #6e5b91 55%, #fdf5ff 100%);
+  --grad-disco:   conic-gradient(from 0deg, #ff2d95, #b026ff, #05d9e8, #39ff14, #ffd700, #ff6b35, #ff2d95);
+  --grad-space:   radial-gradient(ellipse at 50% -20%, #2a1158 0%, #0d0220 55%, #07010f 100%);
+
+  /* --- Typography: families -------------------------------------------- */
+  /* Loaded via fonts.css (Google Fonts). System fallbacks keep the layout
+     readable before the webfonts arrive. */
+  --font-display: "Audiowide", "Orbitron", "Trebuchet MS", sans-serif;
+  --font-heading: "Orbitron", "Audiowide", "Trebuchet MS", sans-serif;
+  --font-body:    "Chakra Petch", "Rajdhani", system-ui, sans-serif;
+  --font-mono:    "Share Tech Mono", "VT323", ui-monospace, monospace;
+  --font-crt:     "VT323", "Share Tech Mono", ui-monospace, monospace;
+  --font-pixel:   "Press Start 2P", "VT323", monospace;
+
+  /* --- Typography: fluid scale (clamp = mobile → desktop) -------------- */
+  --fs-2xs: clamp(0.625rem, 0.60rem + 0.2vw, 0.75rem);
+  --fs-xs:  clamp(0.75rem, 0.72rem + 0.25vw, 0.875rem);
+  --fs-sm:  clamp(0.875rem, 0.84rem + 0.3vw, 1rem);
+  --fs-md:  clamp(1rem, 0.95rem + 0.4vw, 1.125rem);
+  --fs-lg:  clamp(1.25rem, 1.10rem + 0.7vw, 1.5rem);
+  --fs-xl:  clamp(1.75rem, 1.40rem + 1.6vw, 2.5rem);
+  --fs-2xl: clamp(2.5rem, 1.90rem + 3vw, 4rem);
+  --fs-3xl: clamp(3.25rem, 2.20rem + 5vw, 6rem);
+  --fs-hero: clamp(4rem, 2.5rem + 8vw, 9rem);
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.25;
+  --lh-base:  1.55;
+
+  --ls-tight:  -0.01em;
+  --ls-normal: 0.01em;
+  --ls-wide:   0.12em;
+  --ls-mega:   0.35em;
+
+  /* --- Spacing scale (4px base) ---------------------------------------- */
+  --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.5rem;
+  --space-6:  2rem;
+  --space-7:  3rem;
+  --space-8:  4rem;
+  --space-9:  6rem;
+  --space-10: 8rem;
+
+  /* --- Layout ----------------------------------------------------------- */
+  --container-max: 1240px;
+  --container-pad: clamp(1rem, 4vw, 3rem);
+  --header-h: 4.5rem;
+
+  /* --- Radii ------------------------------------------------------------ */
+  --radius-sm:  4px;
+  --radius-md:  10px;
+  --radius-lg:  18px;
+  --radius-xl:  28px;
+  --radius-pill: 999px;
+
+  /* --- Borders ---------------------------------------------------------- */
+  --border-hair: 1px solid var(--color-line);
+  --border-neon: 1px solid color-mix(in srgb, var(--color-neon-cyan) 60%, transparent);
+
+  /* --- Shadows & neon glows -------------------------------------------- */
+  --shadow-1: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-2: 0 8px 30px rgba(0, 0, 0, 0.55);
+  --shadow-panel: 0 18px 60px rgba(8, 1, 20, 0.7);
+
+  /* Reusable neon halos — apply as text-shadow or box-shadow */
+  --glow-cyan:    0 0 4px #05d9e8, 0 0 12px #05d9e8, 0 0 28px rgba(5, 217, 232, 0.55);
+  --glow-magenta: 0 0 4px #ff2d95, 0 0 12px #ff2d95, 0 0 28px rgba(255, 45, 149, 0.55);
+  --glow-purple:  0 0 4px #b026ff, 0 0 12px #b026ff, 0 0 30px rgba(176, 38, 255, 0.55);
+  --glow-gold:    0 0 4px #ffd700, 0 0 12px #ffb84d, 0 0 30px rgba(247, 147, 26, 0.55);
+  --glow-green:   0 0 4px #39ff14, 0 0 12px #39ff14, 0 0 28px rgba(57, 255, 20, 0.5);
+  --glow-soft:    0 0 18px rgba(176, 38, 255, 0.35);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 140ms;
+  --dur-med:  280ms;
+  --dur-slow: 600ms;
+
+  /* --- Elevation / z-index --------------------------------------------- */
+  --z-bg:      0;
+  --z-base:    1;
+  --z-overlay: 50;
+  --z-header:  100;
+  --z-modal:   1000;
+}
+
+/* Honour user preference for reduced motion at the token layer so every
+   animation defined elsewhere can opt into stillness. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med:  0ms;
+    --dur-slow: 0ms;
+  }
+}

@@ -1,0 +1,17 @@
+/* ============================================================================
+   BitRetro — Typography / Webfonts
+   T01: Design System with Retro-Futuristic Aesthetics
+   ----------------------------------------------------------------------------
+   Curated 1970s/1980s-flavoured typefaces, loaded from Google Fonts:
+
+     Audiowide      — chrome/retro display, big numerals & hero text
+     Orbitron       — geometric sci-fi headings
+     Chakra Petch   — squared techno body text
+     Share Tech Mono— terminal mono for data read-outs
+     VT323          — CRT/arcade monospace
+     Press Start 2P — 8-bit pixel accents
+
+   `display=swap` keeps text visible while the fonts download.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;600;700;900&family=Chakra+Petch:wght@300;400;500;600;700&family=Share+Tech+Mono&family=VT323&family=Press+Start+2P&display=swap");
