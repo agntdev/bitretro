@@ -1,0 +1,157 @@
+/* ============================================================================
+   BitRetro — Retro-Futurism Visual Effects
+   T05: Retro-Futurism Visual Effects
+   ----------------------------------------------------------------------------
+   Layers the signature look: neon text glow, CRT scanlines, glitch transitions
+   on data refresh, and the disco-ball background (WebGL canvas + CSS fallback).
+   Loaded last so it sits on top of the base styling.
+   ========================================================================== */
+
+/* --- Background layers ----------------------------------------------- */
+
+/* WebGL disco-ball canvas, painted behind all content. */
+.fx-bg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: block;
+}
+
+/* Pure-CSS disco ball — shown only when WebGL is unavailable. */
+.fx-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  display: none;
+  overflow: hidden;
+}
+.fx-fallback::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: min(40vw, 360px);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 0deg,
+      #ff2d95 0deg 12deg, #b026ff 12deg 24deg, #05d9e8 24deg 36deg,
+      #39ff14 36deg 48deg, #ffd700 48deg 60deg, #ff6b35 60deg 72deg);
+  filter: blur(1px) saturate(1.3) brightness(0.9);
+  box-shadow: 0 0 90px rgba(176, 38, 255, 0.5), inset 0 0 60px rgba(0,0,0,0.6);
+  opacity: 0.55;
+  animation: spin 18s linear infinite;
+}
+.fx-fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-space);
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+body.no-webgl .fx-bg { display: none; }
+body.no-webgl .fx-fallback { display: block; }
+
+/* --- CRT scanlines + vignette overlay -------------------------------- */
+.fx-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0.22) 3px
+  );
+  background-size: 100% 4px;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  animation: scanline-drift 9s linear infinite;
+}
+/* Soft CRT vignette, drawn with the same overlay element's box-shadow. */
+.fx-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 180px rgba(0, 0, 0, 0.85);
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.35) 100%);
+}
+
+/* --- Neon glow amplification on key elements ------------------------- */
+.brand__name { animation: neon-pulse 4s ease-in-out infinite; }
+
+.price-board__price {
+  text-shadow: var(--glow-gold);
+  animation: neon-pulse 3.4s ease-in-out infinite;
+}
+
+.section__title {
+  text-shadow: var(--glow-purple);
+}
+
+.hero__title {
+  text-shadow:
+    0 0 6px rgba(255, 79, 216, 0.7),
+    0 0 26px rgba(176, 38, 255, 0.6),
+    0 0 60px rgba(5, 217, 232, 0.4);
+}
+
+/* Cards get an inner neon edge that lights on hover (over T01 base). */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--card-accent) 35%, transparent);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+.card:hover::after { opacity: 1; }
+
+/* --- Glitch transition on live-data refresh -------------------------- */
+/* effects.js adds .fx-glitch for ~400ms whenever the price value changes. */
+.fx-glitch {
+  animation: glitch-shift 360ms steps(2) 1;
+  position: relative;
+}
+.fx-glitch::before,
+.fx-glitch::after {
+  content: attr(data-glitch);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.fx-glitch::before {
+  left: 2px;
+  color: var(--color-neon-cyan);
+  clip-path: inset(0 0 55% 0);
+  animation: glitch-clip 360ms steps(2) 1;
+}
+.fx-glitch::after {
+  left: -2px;
+  color: var(--color-neon-magenta);
+  clip-path: inset(55% 0 0 0);
+  animation: glitch-clip 360ms steps(2) reverse 1;
+}
+
+/* --- Reduced motion: calm everything down ---------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fx-scanlines,
+  .brand__name,
+  .price-board__price,
+  .fx-fallback::before { animation: none; }
+  .fx-glitch,
+  .fx-glitch::before,
+  .fx-glitch::after { animation: none; }
+  .fx-glitch::before, .fx-glitch::after { display: none; }
+}
