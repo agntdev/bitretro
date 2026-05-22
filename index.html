@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitRetro — Live Bitcoin, Retro-Futurised</title>
+  <meta name="description" content="BitRetro: real-time Bitcoin price and market data wrapped in a 1970s/80s retro-futuristic, glam-disco design." />
+
+  <!-- T01 design system -->
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <!-- T02 structure -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#top" aria-label="BitRetro home">
+        <!-- Bitcoin logo (inline SVG) -->
+        <svg class="brand__logo" viewBox="0 0 64 64" role="img" aria-label="Bitcoin logo">
+          <circle cx="32" cy="32" r="30" fill="#f7931a" />
+          <path fill="#fff" d="M43.6 28.3c.6-3.9-2.4-6-6.4-7.4l1.3-5.2-3.2-.8-1.3 5c-.8-.2-1.7-.4-2.6-.6l1.3-5.1-3.2-.8-1.3 5.2c-.7-.2-1.4-.3-2-.5v0l-4.4-1.1-.8 3.4s2.4.5 2.3.6c1.3.3 1.5 1.2 1.5 1.9l-1.5 6c.1 0 .2.1.3.1-.1 0-.2-.1-.3-.1l-2.1 8.4c-.2.4-.6 1-1.5.8 0 .1-2.3-.6-2.3-.6l-1.6 3.7 4.2 1c.8.2 1.5.4 2.3.6l-1.3 5.3 3.2.8 1.3-5.2c.9.2 1.7.5 2.6.7l-1.3 5.1 3.2.8 1.3-5.3c5.4 1 9.5.6 11.2-4.3 1.4-3.9-.1-6.2-2.9-7.7 2.1-.5 3.6-1.8 4-4.6zm-7.2 10.2c-1 3.9-7.5 1.8-9.7 1.3l1.7-6.9c2.1.5 8.9 1.6 8 5.6zm1-10.3c-.9 3.6-6.4 1.8-8.2 1.3l1.6-6.3c1.8.5 7.5 1.3 6.6 5z" />
+        </svg>
+        <span class="brand__name">Bit<b>Retro</b></span>
+      </a>
+
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a class="nav__link" href="#price" aria-current="page">Price</a>
+        <a class="nav__link" href="#metrics">Metrics</a>
+        <a class="nav__link" href="#network">Network</a>
+        <a class="nav__link" href="#about">About</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main" id="main">
+    <span id="top"></span>
+
+    <!-- Hero -->
+    <section class="hero container" aria-labelledby="hero-title">
+      <p class="eyebrow hero__eyebrow">
+        <span class="pill__dot anim-blink" style="color:var(--color-neon-green)"></span>
+        Live from the blockchain
+      </p>
+      <h1 class="hero__title glitch" id="hero-title" data-text="BITRETRO">BITRETRO</h1>
+      <p class="hero__subtitle">
+        Real-time Bitcoin, rendered in chrome and neon. A retro-futuristic
+        window into the world's first cryptocurrency.
+      </p>
+    </section>
+
+    <!-- Price board -->
+    <section class="section container" id="price" aria-labelledby="price-title">
+      <h2 class="sr-only" id="price-title">Bitcoin price</h2>
+      <div class="panel price-board">
+        <div class="price-board__main">
+          <span class="price-board__label">BTC / USD</span>
+          <span class="price-board__price" id="btc-price" data-field="price">$—</span>
+          <div class="price-board__deltas">
+            <span class="pill" id="btc-change-1h" data-field="change1h">1h —</span>
+            <span class="pill" id="btc-change-24h" data-field="change24h">24h —</span>
+            <span class="pill pill--gold"><span class="pill__dot"></span>Last update <span id="last-update" data-field="updated">—</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market metrics -->
+    <section class="section container" id="metrics" aria-labelledby="metrics-title">
+      <div class="section__head">
+        <h2 class="section__title">Market Metrics</h2>
+      </div>
+      <div class="stats">
+        <article class="card card--gold">
+          <span class="card__label">Market Cap</span>
+          <span class="card__value" id="market-cap" data-field="marketCap">$—</span>
+          <span class="card__sub">USD</span>
+        </article>
+        <article class="card card--magenta">
+          <span class="card__label">24h Volume</span>
+          <span class="card__value" id="volume" data-field="volume">$—</span>
+          <span class="card__sub">traded</span>
+        </article>
+        <article class="card card--green">
+          <span class="card__label">24h High</span>
+          <span class="card__value" id="high-24h" data-field="high24h">$—</span>
+          <span class="card__sub">USD</span>
+        </article>
+        <article class="card">
+          <span class="card__label">24h Low</span>
+          <span class="card__value" id="low-24h" data-field="low24h">$—</span>
+          <span class="card__sub">USD</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- Network throughput -->
+    <section class="section container" id="network" aria-labelledby="network-title">
+      <div class="section__head">
+        <h2 class="section__title">Network Throughput</h2>
+      </div>
+      <div class="stats">
+        <article class="card">
+          <span class="card__label">Tx / Second</span>
+          <span class="card__value" id="tps" data-field="tps">—</span>
+          <span class="card__sub">on-chain</span>
+        </article>
+        <article class="card">
+          <span class="card__label">Tx / Minute</span>
+          <span class="card__value" id="tpm" data-field="tpm">—</span>
+          <span class="card__sub">estimated</span>
+        </article>
+        <article class="card">
+          <span class="card__label">Tx / Hour</span>
+          <span class="card__value" id="tph" data-field="tph">—</span>
+          <span class="card__sub">estimated</span>
+        </article>
+        <article class="card card--gold">
+          <span class="card__label">Block Height</span>
+          <span class="card__value" id="block-height" data-field="blockHeight">—</span>
+          <span class="card__sub">latest</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section container" id="about" aria-labelledby="about-title">
+      <div class="section__head">
+        <h2 class="section__title">About BitRetro</h2>
+      </div>
+      <div class="about__grid">
+        <div class="card">
+          <span class="card__label">Retro-futurism</span>
+          <p style="color:var(--color-ink-muted)">A 1970s/80s vision of tomorrow — neon signage, chrome and deep-space gradients.</p>
+        </div>
+        <div class="card card--magenta">
+          <span class="card__label">Live data</span>
+          <p style="color:var(--color-ink-muted)">Prices and market stats refresh straight from a public Bitcoin API.</p>
+        </div>
+        <div class="card card--green">
+          <span class="card__label">Frontend-only</span>
+          <p style="color:var(--color-ink-muted)">No backend, no tracking-by-default. Just HTML, CSS and a sprinkle of JS.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__note">
+        BitRetro &middot; <span id="year">2026</span> &middot; Data is informational only, not financial advice.
+      </p>
+      <nav class="site-footer__links" aria-label="Footer">
+        <a class="nav__link" href="#top">Top</a>
+        <a class="nav__link" href="https://github.com/agntdev/bitretro" rel="noopener" target="_blank">GitHub</a>
+        <a class="nav__link" href="https://www.coingecko.com" rel="noopener" target="_blank">Data: CoinGecko</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- T02 base behaviour -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>
