@@ -14,6 +14,11 @@
   <!-- T02 structure -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
+  <!-- T03 live data states -->
+  <link rel="stylesheet" href="css/data.css" />
+  <!-- Warm up the data APIs -->
+  <link rel="preconnect" href="https://api.coingecko.com" />
+  <link rel="preconnect" href="https://mempool.space" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -63,7 +68,7 @@
     <!-- Price board -->
     <section class="section container" id="price" aria-labelledby="price-title">
       <h2 class="sr-only" id="price-title">Bitcoin price</h2>
-      <div class="panel price-board">
+      <div class="panel price-board" aria-live="polite">
         <div class="price-board__main">
           <span class="price-board__label">BTC / USD</span>
           <span class="price-board__price" id="btc-price" data-field="price">$—</span>
@@ -73,6 +78,7 @@
             <span class="pill pill--gold"><span class="pill__dot"></span>Last update <span id="last-update" data-field="updated">—</span></span>
           </div>
         </div>
+        <p class="price-board__status" id="data-status" role="status" hidden></p>
       </div>
     </section>
 
@@ -81,7 +87,7 @@
       <div class="section__head">
         <h2 class="section__title">Market Metrics</h2>
       </div>
-      <div class="stats">
+      <div class="stats" aria-live="polite">
         <article class="card card--gold">
           <span class="card__label">Market Cap</span>
           <span class="card__value" id="market-cap" data-field="marketCap">$—</span>
@@ -110,7 +116,7 @@
       <div class="section__head">
         <h2 class="section__title">Network Throughput</h2>
       </div>
-      <div class="stats">
+      <div class="stats" aria-live="polite">
         <article class="card">
           <span class="card__label">Tx / Second</span>
           <span class="card__value" id="tps" data-field="tps">—</span>
@@ -172,5 +178,7 @@
 
   <!-- T02 base behaviour -->
   <script src="js/main.js" defer></script>
+  <!-- T03 live Bitcoin data -->
+  <script src="js/price.js" defer></script>
 </body>
 </html>
