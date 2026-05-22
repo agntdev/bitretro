@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+# ---------------------------------------------------------------------------
+# To activate: copy this file to .github/workflows/deploy.yml and set
+# Settings -> Pages -> Source to "GitHub Actions".
+#   mkdir -p .github/workflows && cp docs/deploy-pages.yml .github/workflows/deploy.yml
+# (It ships under docs/ because committing workflows needs the `workflow`
+#  OAuth scope.)
+# ---------------------------------------------------------------------------
+#
+# Builds (no build step needed — static site) and deploys BitRetro to GitHub
+# Pages on every push to main.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; cancel in-progress runs for the same ref.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Static site lives at the repo root.
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://agntdev.github.io/bitretro/sitemap.xml
