@@ -1,0 +1,182 @@
+/* ============================================================================
+   BitRetro — Layout (header / main / footer)
+   T02: Base HTML/CSS/JS Structure
+   ----------------------------------------------------------------------------
+   BEM-named structural blocks for the page shell and the price board. Visual
+   polish (responsive breakpoints, advanced effects) is layered on in T04/T05.
+   ========================================================================== */
+
+/* --- Site header ------------------------------------------------------ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  min-height: var(--header-h);
+  background: color-mix(in srgb, var(--color-bg-900) 80%, transparent);
+  border-bottom: var(--border-hair);
+  backdrop-filter: blur(10px);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--ls-normal);
+  color: var(--color-ink);
+}
+.brand__logo {
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 0 8px rgba(247, 147, 26, 0.7));
+}
+.brand__name { color: var(--color-gold); text-shadow: var(--glow-gold); }
+.brand__name b { color: var(--color-neon-cyan); text-shadow: var(--glow-cyan); }
+
+/* Primary navigation */
+.nav { display: flex; align-items: center; gap: var(--space-5); }
+.nav__link {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  transition: color var(--dur-fast) var(--ease-out), text-shadow var(--dur-med);
+}
+.nav__link:hover,
+.nav__link[aria-current="page"] {
+  color: var(--color-neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+/* Hamburger toggle (hidden on desktop, wired in T04) */
+.nav-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+.nav-toggle__bar,
+.nav-toggle__bar::before,
+.nav-toggle__bar::after {
+  content: "";
+  display: block;
+  width: 20px; height: 2px;
+  margin: 0 auto;
+  background: var(--color-neon-cyan);
+  box-shadow: var(--glow-cyan);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.nav-toggle__bar { position: relative; }
+.nav-toggle__bar::before { position: absolute; top: -6px; }
+.nav-toggle__bar::after  { position: absolute; top: 6px; }
+
+/* --- Main / hero ------------------------------------------------------ */
+.main { display: block; }
+
+.hero {
+  padding-block: var(--space-9) var(--space-7);
+  text-align: center;
+}
+.hero__eyebrow { justify-content: center; }
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  letter-spacing: var(--ls-tight);
+  margin-block: var(--space-3);
+}
+.hero__subtitle {
+  max-width: 56ch;
+  margin: var(--space-3) auto 0;
+  color: var(--color-ink-muted);
+  font-size: var(--fs-md);
+}
+
+/* --- Price board ------------------------------------------------------ */
+.price-board {
+  display: grid;
+  gap: var(--space-5);
+  margin-block: var(--space-7);
+}
+.price-board__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+.price-board__label {
+  font-family: var(--font-mono);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+.price-board__price {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+  color: var(--color-gold);
+  text-shadow: var(--glow-gold);
+}
+.price-board__deltas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+/* Stat grid (uses .card from components.css) */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+/* Generic content section */
+.section { padding-block: var(--space-8); }
+.section__head { margin-bottom: var(--space-5); text-align: center; }
+.section__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-xl);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+/* About blurb */
+.about__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+/* --- Footer ----------------------------------------------------------- */
+.site-footer {
+  margin-top: var(--space-9);
+  padding-block: var(--space-7);
+  border-top: var(--border-hair);
+  background: color-mix(in srgb, var(--color-bg-900) 70%, transparent);
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.site-footer__links { display: flex; gap: var(--space-5); }
+.site-footer__note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--color-ink-faint);
+}
