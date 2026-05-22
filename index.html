@@ -16,14 +16,21 @@
   <link rel="stylesheet" href="css/layout.css" />
   <!-- T03 live data states -->
   <link rel="stylesheet" href="css/data.css" />
-  <!-- T04 responsive overrides (loaded last) -->
+  <!-- T04 responsive overrides -->
   <link rel="stylesheet" href="css/responsive.css" />
+  <!-- T05 retro-futurism effects (loaded last) -->
+  <link rel="stylesheet" href="css/effects.css" />
   <!-- Warm up the data APIs -->
   <link rel="preconnect" href="https://api.coingecko.com" />
   <link rel="preconnect" href="https://mempool.space" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== RETRO-FX BACKGROUND (T05) ===================== -->
+  <canvas class="fx-bg" id="fx-bg" aria-hidden="true"></canvas>
+  <div class="fx-fallback" aria-hidden="true"></div>
+  <div class="fx-scanlines" aria-hidden="true"></div>
 
   <!-- ===================== HEADER ===================== -->
   <header class="site-header">
@@ -182,5 +189,7 @@
   <script src="js/main.js" defer></script>
   <!-- T03 live Bitcoin data -->
   <script src="js/price.js" defer></script>
+  <!-- T05 retro-futurism effects -->
+  <script src="js/effects.js" defer></script>
 </body>
 </html>
