@@ -1,0 +1,18 @@
+{
+  "name": "BitRetro — Live Bitcoin, Retro-Futurised",
+  "short_name": "BitRetro",
+  "description": "Real-time Bitcoin price and market data in a 1970s/80s retro-futuristic, glam-disco design.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07010f",
+  "theme_color": "#07010f",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
